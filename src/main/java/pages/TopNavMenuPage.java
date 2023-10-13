@@ -31,4 +31,8 @@ public class TopNavMenuPage extends BasicPage{
     public String getSubheaderTitleText() {
         return driver.findElement(By.className("header_secondary_container")).getText();
     }
+
+    public void clickOnShoppingCartButton() {
+        driver.findElement(By.className("shopping_cart_link")).click();
+    }
 }

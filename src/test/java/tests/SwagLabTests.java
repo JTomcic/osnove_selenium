@@ -269,7 +269,7 @@ public class SwagLabTests extends BasicTestSwag {
 
         int cartBadgeNumber = Integer.parseInt(inventoryPage.getCartBadgeNumber());
 
-        Assert.assertEquals(cartBadgeNumber, cartPage.getAddedCartItems(),
+        Assert.assertEquals(cartBadgeNumber, cartPage.getNumberOfAddedCartItems(),
                 "Number in the cart icon should be equiavalent to the total numbers of added items.");
     }
 
@@ -463,5 +463,33 @@ public class SwagLabTests extends BasicTestSwag {
                 "Ekis button should be visible.");
 
         leftNavMenuPage.clickEkisButton();
+    }
+
+    @Test(priority = 24, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsAddedIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(cartPage.doesAddedCartItemExist(), "Added items should be exist in cart");
     }
 }
