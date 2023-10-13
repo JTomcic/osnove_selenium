@@ -22,5 +22,8 @@ public class CartPage extends BasicPage {
     public boolean doesDescriptionCartItemExist() {
         return elementExist(By.className("inventory_item_desc"));
     }
+    public boolean doesPriceCartItemExist() {
+        return elementExist(By.className("inventory_item_price"));
+    }
 
 }
