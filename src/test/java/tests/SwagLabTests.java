@@ -442,4 +442,26 @@ public class SwagLabTests extends BasicTestSwag {
                 leftNavMenuPage.doesEkisButtonExist(),
                 "Ekis button should be visible.");
     }
+
+    @Test(priority = 23, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheEkisButtonIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        leftNavMenuPage.waitForMenuToBeVisible();
+
+        Assert.assertTrue(
+                leftNavMenuPage.doesEkisButtonExist(),
+                "Ekis button should be visible.");
+
+        leftNavMenuPage.clickEkisButton();
+    }
 }

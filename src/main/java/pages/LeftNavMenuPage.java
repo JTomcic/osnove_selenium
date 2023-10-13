@@ -47,6 +47,12 @@ public class LeftNavMenuPage extends BasicPage{
     public boolean doesResetAppButtonExist() {
         return elementExist(By.linkText("Reset App State"), 0);
     }
+    public WebElement getEkisButton() {
+        return driver.findElement(By.id("react-burger-cross-btn"));
+    }
+    public void clickEkisButton() {
+        getEkisButton().click();
+    }
     public boolean doesEkisButtonExist() {
         return elementExist(By.id("react-burger-cross-btn"));
     }
