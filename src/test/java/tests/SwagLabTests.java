@@ -373,4 +373,28 @@ public class SwagLabTests extends BasicTestSwag {
                 driver.getCurrentUrl(), "https://saucelabs.com/",
                 "User should be redirected to the sauce labs website.");
     }
+    @Test(priority = 20, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfLogoutOptionIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        leftNavMenuPage.waitForMenuToBeVisible();
+
+        Assert.assertTrue(leftNavMenuPage.doesLogoutButtonExist(),
+                "Logout link should exists on menu.");
+
+        leftNavMenuPage.clickOnLeftNavMenuItem(2);
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(), "https://www.saucedemo.com/",
+                "User should be redirected to the login page.");
+    }
 }
