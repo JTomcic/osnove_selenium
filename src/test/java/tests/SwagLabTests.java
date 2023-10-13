@@ -266,7 +266,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "Number in the cart icon should be equiavalent to the total numbers of added items.");
     }
     @Test(priority = 15, retryAnalyzer = SwagLabsRetry.class)
-    public void verifyTheSubheaderTitle () {
+    public void verifyTheSubheaderTitle() {
         String username = "standard_user";
         String password = "secret_sauce";
 
@@ -280,5 +280,22 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertEquals(topNavMenuPage.getSubheaderTitleText(),
                 "Your Cart",
                 "After click on cart button the sub-header title should be 'Your Cart'.");
+    }
+    @Test(priority = 16, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheTotalNumberOfMenuOptions() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        Assert.assertEquals(leftNavMenuPage.getNumberOfLeftNavMenuItems(), 4,
+                "There should be four total options in menu.");
+
     }
 }

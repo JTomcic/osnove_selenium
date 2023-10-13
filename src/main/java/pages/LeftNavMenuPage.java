@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+
 public class LeftNavMenuPage extends BasicPage{
     public LeftNavMenuPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -25,4 +28,11 @@ public class LeftNavMenuPage extends BasicPage{
         getLogoutLink().click();
     }
 
+    public List<WebElement> getLeftNavMenuItems() {
+        return driver.findElements(By.cssSelector("nav a"));
+    }
+
+    public int getNumberOfLeftNavMenuItems() {
+        return getLeftNavMenuItems().size();
+    }
 }
