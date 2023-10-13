@@ -19,5 +19,8 @@ public class CartPage extends BasicPage {
     public String getItemTitleText() {
         return driver.findElement(By.id("item_4_title_link")).getText();
     }
+    public boolean doesDescriptionCartItemExist() {
+        return elementExist(By.className("inventory_item_desc"));
+    }
 
 }
