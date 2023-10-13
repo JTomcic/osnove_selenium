@@ -10,19 +10,17 @@ public class LeftNavMenuPage extends BasicPage{
     }
 
     public void waitForMenuToBeVisible() {
-        wait.until(ExpectedConditions
+        wait
+                .withMessage("Left Menu navigation should be visible.")
+                .until(ExpectedConditions
                 .visibilityOfElementLocated(By.className("bm-menu-wrap")));
-
     }
-
     public boolean doesLogoutButtonExist() {
         return elementExist(By.linkText("Logout"), 0);
     }
-
     public WebElement getLogoutLink() {
         return driver.findElement(By.linkText("Logout"));
     }
-
     public void clickOnLogoutLink() {
         getLogoutLink().click();
     }
