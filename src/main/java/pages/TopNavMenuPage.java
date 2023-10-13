@@ -19,6 +19,9 @@ public class TopNavMenuPage extends BasicPage{
     public boolean doesMenuButtonExist() {
         return elementExist(By.id("react-burger-menu-btn"));
     }
+    public boolean doesCartIconExist() {
+        return elementExist(By.id("shopping_cart_container"));
+    }
 
     public String getHeaderTitleText() {
         return driver.findElement(By.className("app_logo")).getText();

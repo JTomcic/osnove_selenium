@@ -196,4 +196,19 @@ public class SwagLabTests extends BasicTestSwag {
                 topNavMenuPage.doesMenuButtonExist(),
                 "Hamburger menu button should be exist after click on cart button.");
     }
+    @Test(priority = 10, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCartIconIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        Assert.assertTrue(
+                topNavMenuPage.doesCartIconExist(),
+                "Cart icon should be presented.");
+    }
 }
