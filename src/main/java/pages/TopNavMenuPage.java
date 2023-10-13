@@ -13,14 +13,16 @@ public class TopNavMenuPage extends BasicPage{
     public void clickOnMenuButton() {
         getMenuButton().click();
     }
-    public boolean doesLogoutButtonExist() {
-        return elementExist(By.linkText("Logout"), 0);
-    }
+
     public boolean doesMenuButtonExist() {
         return elementExist(By.id("react-burger-menu-btn"));
     }
     public boolean doesCartIconExist() {
         return elementExist(By.id("shopping_cart_container"));
+    }
+
+    public boolean doesCartBadgeExist() {
+        return elementExist(By.className("shopping_cart_badge"), 0);
     }
 
     public String getHeaderTitleText() {

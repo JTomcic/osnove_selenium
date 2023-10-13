@@ -373,6 +373,7 @@ public class SwagLabTests extends BasicTestSwag {
                 driver.getCurrentUrl(), "https://saucelabs.com/",
                 "User should be redirected to the sauce labs website.");
     }
+
     @Test(priority = 20, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfLogoutOptionIsWorking() {
         String username = "standard_user";
@@ -396,5 +397,29 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertEquals(
                 driver.getCurrentUrl(), "https://www.saucedemo.com/",
                 "User should be redirected to the login page.");
+    }
+
+    @Test(priority = 21, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfResetAppStateIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        leftNavMenuPage.waitForMenuToBeVisible();
+
+        Assert.assertTrue(leftNavMenuPage.doesResetAppButtonExist(),
+                "Reset App Button link should exist on menu.");
+
+        leftNavMenuPage.clickOnLeftNavMenuItem(3);
+
+        Assert.assertFalse(topNavMenuPage.doesCartBadgeExist(),
+                "Cart badge icon should not exist.");
     }
 }

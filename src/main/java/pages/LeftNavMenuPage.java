@@ -14,9 +14,9 @@ public class LeftNavMenuPage extends BasicPage{
 
     public void waitForMenuToBeVisible() {
         wait
-                .withMessage("Left Menu navigation should be visible.")
-                .until(ExpectedConditions
-                .visibilityOfElementLocated(By.className("bm-menu-wrap")));
+            .withMessage("Left Menu navigation should be visible.")
+            .until(ExpectedConditions
+            .visibilityOfElementLocated(By.className("bm-menu-wrap")));
     }
     public boolean doesLogoutButtonExist() {
         return elementExist(By.linkText("Logout"), 0);
@@ -42,5 +42,9 @@ public class LeftNavMenuPage extends BasicPage{
 
     public void clickOnLeftNavMenuItem(int itemIndex) {
         getLeftNavMenuItems().get(itemIndex).click();
+    }
+
+    public boolean doesResetAppButtonExist() {
+        return elementExist(By.linkText("Reset App State"), 0);
     }
 }

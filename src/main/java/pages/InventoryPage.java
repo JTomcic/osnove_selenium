@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class InventoryPage extends BasicPage {
     public InventoryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -26,6 +28,7 @@ public class InventoryPage extends BasicPage {
     public boolean doesRemoveBtnExist() {
         return elementExist(By.id("remove-sauce-labs-backpack"));
     }
+
     public WebElement getCartBadge() {
         return driver.findElement(By.cssSelector(".shopping_cart_badge"));
     }
@@ -39,4 +42,6 @@ public class InventoryPage extends BasicPage {
     public void clickOnCartButton() {
         getCartButton().click();
     }
+
+
 }
