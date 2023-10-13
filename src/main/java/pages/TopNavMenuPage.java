@@ -26,4 +26,7 @@ public class TopNavMenuPage extends BasicPage{
     public String getHeaderTitleText() {
         return driver.findElement(By.className("app_logo")).getText();
     }
+    public String getSubheaderTitleText() {
+        return driver.findElement(By.className("header_secondary_container")).getText();
+    }
 }

@@ -265,4 +265,20 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertEquals(cartBadgeNumber, cartPage.getAddedCartItems(),
                 "Number in the cart icon should be equiavalent to the total numbers of added items.");
     }
+    @Test(priority = 15, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheSubheaderTitle () {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.getSubheaderTitleText();
+        Assert.assertEquals(topNavMenuPage.getSubheaderTitleText(),
+                "Your Cart",
+                "After click on cart button the sub-header title should be 'Your Cart'.");
+    }
 }
