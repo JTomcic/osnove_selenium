@@ -138,7 +138,29 @@ public class SwagLabTests extends BasicTestSwag {
                 driver.getCurrentUrl(),
                 baseUrl + "/cart.html",
                 "Should be redirected to cart page after click on cart button.");
+    }
+    @Test(priority = 8, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheTitlePage() {
+        String username = "standard_user";
+        String password = "secret_sauce";
 
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
 
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+        inventoryPage.clickOnAddCartButton();
+
+        inventoryPage.clickOnCartButton();
+
+        Assert.assertEquals(
+                driver.getTitle(),
+                        "Swag Labs",
+                "After click on cart button the title should be 'Swag Labs'.");
     }
 }
