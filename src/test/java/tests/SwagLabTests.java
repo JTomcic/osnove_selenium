@@ -331,4 +331,25 @@ public class SwagLabTests extends BasicTestSwag {
                     "Items value should be " + expectedLeftNavMenuItems.get(i) + ".");
         }
     }
+
+    @Test(priority = 18, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfAllItemsOptionIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        leftNavMenuPage.clickOnLeftNavMenuItem(0);
+
+        Assert.assertEquals(
+            driver.getCurrentUrl(),
+            baseUrl + "/inventory.html",
+            "Should be redirected to products page after click on All items link.");
+    }
 }

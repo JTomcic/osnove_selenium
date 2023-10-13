@@ -39,4 +39,8 @@ public class LeftNavMenuPage extends BasicPage{
     public String getSingleLeftNavMenuItemValue(int itemIndex) {
         return getLeftNavMenuItems().get(itemIndex).getText();
     }
+
+    public void clickOnLeftNavMenuItem(int itemIndex) {
+        getLeftNavMenuItems().get(itemIndex).click();
+    }
 }
