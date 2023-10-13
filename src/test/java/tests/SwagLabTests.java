@@ -226,4 +226,19 @@ public class SwagLabTests extends BasicTestSwag {
 
         leftNavMenuPage.waitForMenuToBeVisible();
     }
+    @Test(priority = 13, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCartIconIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+    }
 }
