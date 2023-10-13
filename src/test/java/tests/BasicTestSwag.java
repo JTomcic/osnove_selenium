@@ -24,6 +24,8 @@ public class BasicTestSwag {
     protected LeftNavMenuPage leftNavMenuPage;
     protected InventoryPage inventoryPage;
 
+    protected CartPage cartPage;
+
     @BeforeClass
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -38,6 +40,7 @@ public class BasicTestSwag {
         topNavMenuPage = new TopNavMenuPage(driver, wait);
         leftNavMenuPage = new LeftNavMenuPage(driver, wait);
         inventoryPage = new InventoryPage(driver, wait);
+        cartPage = new CartPage(driver, wait);
 
     }
 

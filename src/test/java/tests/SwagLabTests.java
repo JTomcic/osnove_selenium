@@ -118,4 +118,27 @@ public class SwagLabTests extends BasicTestSwag {
                 "Cart elements indicator should be 1.");
     }
 
+    @Test(priority = 7, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheUrl() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.clickOnCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+
+    }
 }

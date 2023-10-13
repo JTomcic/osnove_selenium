@@ -32,4 +32,11 @@ public class InventoryPage extends BasicPage {
     public String getCartBadgeNumber() {
         return getCartBadge().getText();
     }
+
+    public WebElement getCartButton() {
+        return driver.findElement(By.className("shopping_cart_link"));
+    }
+    public void clickOnCartButton() {
+        getCartButton().click();
+    }
 }
