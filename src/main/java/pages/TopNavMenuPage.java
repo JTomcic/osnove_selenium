@@ -7,7 +7,6 @@ public class TopNavMenuPage extends BasicPage{
     public TopNavMenuPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
-
     public WebElement getMenuButton() {
         return driver.findElement(By.id("react-burger-menu-btn"));
     }
@@ -16,6 +15,13 @@ public class TopNavMenuPage extends BasicPage{
     }
     public boolean doesLogoutButtonExist() {
         return elementExist(By.linkText("Logout"), 0);
+    }
+    public boolean doesMenuButtonExist() {
+        return elementExist(By.id("react-burger-menu-btn"));
+    }
+
+    public String getHeaderTitleText() {
+        return driver.findElement(By.className("app_logo")).getText();
     }
 
 }

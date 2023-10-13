@@ -1,5 +1,7 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retry.SwagLabsRetry;
@@ -174,9 +176,24 @@ public class SwagLabTests extends BasicTestSwag {
 
         inventoryPage.clickOnCartButton();
 
-        cartPage.getHeaderTitleText();
-        Assert.assertEquals(cartPage.getHeaderTitleText(),
+        topNavMenuPage.getHeaderTitleText();
+        Assert.assertEquals(topNavMenuPage.getHeaderTitleText(),
                 "Swag Labs",
                 "After click on cart button the header title should be 'Swag Labs'.");
+    }
+    @Test(priority = 10, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheHamburgerMenuButtonIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        Assert.assertTrue(
+                topNavMenuPage.doesMenuButtonExist(),
+                "Hamburger menu button should be exist after click on cart button.");
     }
 }
