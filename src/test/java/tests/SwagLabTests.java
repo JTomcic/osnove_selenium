@@ -241,4 +241,28 @@ public class SwagLabTests extends BasicTestSwag {
                 baseUrl + "/cart.html",
                 "Should be redirected to cart page after click on cart button.");
     }
+    @Test(priority = 14, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCartIconHasCorrectNumberOfAddedItems() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        inventoryPage.clickOnCartButton();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        int cartBadgeNumber = Integer.parseInt(inventoryPage.getCartBadgeNumber());
+
+        Assert.assertEquals(cartBadgeNumber, cartPage.getAddedCartItems(),
+                "Number in the cart icon should be equiavalent to the total numbers of added items.");
+    }
 }
