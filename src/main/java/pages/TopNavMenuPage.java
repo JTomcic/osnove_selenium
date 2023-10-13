@@ -11,7 +11,6 @@ public class TopNavMenuPage extends BasicPage{
     public WebElement getMenuButton() {
         return driver.findElement(By.id("react-burger-menu-btn"));
     }
-
     public void clickOnMenuButton() {
         getMenuButton().click();
     }
