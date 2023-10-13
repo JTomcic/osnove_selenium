@@ -307,6 +307,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "There should be four total options in menu.");
 
     }
+
     @Test(priority = 17, retryAnalyzer = SwagLabsRetry.class)
     public void verifyTheSpellingOfAllOptionsInMenu() {
         String username = "standard_user";
@@ -348,8 +349,28 @@ public class SwagLabTests extends BasicTestSwag {
         leftNavMenuPage.clickOnLeftNavMenuItem(0);
 
         Assert.assertEquals(
-            driver.getCurrentUrl(),
-            baseUrl + "/inventory.html",
-            "Should be redirected to products page after click on All items link.");
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to products page after click on All items link.");
+    }
+
+    @Test(priority = 19, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfAboutOptionIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        leftNavMenuPage.clickOnLeftNavMenuItem(1);
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(), "https://saucelabs.com/",
+                "User should be redirected to the sauce labs website.");
     }
 }
