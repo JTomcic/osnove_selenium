@@ -492,4 +492,36 @@ public class SwagLabTests extends BasicTestSwag {
 
         Assert.assertTrue(cartPage.doesAddedCartItemExist(), "Added items should be exist in cart");
     }
+
+    @Test(priority = 25, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsTitleIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(cartPage.doesAddedCartItemExist(), "Added items should be exist in cart");
+
+        Assert.assertEquals(cartPage.getItemTitleText(),
+                "Sauce Labs Backpack",
+                "Item's title should be visible.");
+    }
 }
