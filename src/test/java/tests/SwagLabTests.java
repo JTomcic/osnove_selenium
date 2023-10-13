@@ -1,11 +1,11 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retry.SwagLabsRetry;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SwagLabTests extends BasicTestSwag {
@@ -61,6 +61,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "Epic sadface: Sorry, this user has been locked out.",
                 "Error message is not valid when user is locked out.");
     }
+
     @Test(priority = 5, retryAnalyzer = SwagLabsRetry.class)
     public void verifySuccessfulLogin() {
         String username = "standard_user";
@@ -69,7 +70,6 @@ public class SwagLabTests extends BasicTestSwag {
         loginPage.clearAndTypeUsername(username);
         loginPage.clearAndTypePassword(password);
         loginPage.clickOnLoginButton();
-
 
 
         Assert.assertEquals(
@@ -141,6 +141,7 @@ public class SwagLabTests extends BasicTestSwag {
                 baseUrl + "/cart.html",
                 "Should be redirected to cart page after click on cart button.");
     }
+
     @Test(priority = 8, retryAnalyzer = SwagLabsRetry.class)
     public void verifyTheTitlePage() {
         String username = "standard_user";
@@ -162,9 +163,10 @@ public class SwagLabTests extends BasicTestSwag {
 
         Assert.assertEquals(
                 driver.getTitle(),
-                        "Swag Labs",
+                "Swag Labs",
                 "After click on cart button the title should be 'Swag Labs'.");
     }
+
     @Test(priority = 9, retryAnalyzer = SwagLabsRetry.class)
     public void verifyTheTitleInHeader() {
         String username = "standard_user";
@@ -181,6 +183,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "Swag Labs",
                 "After click on cart button the header title should be 'Swag Labs'.");
     }
+
     @Test(priority = 10, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheHamburgerMenuButtonIsPresented() {
         String username = "standard_user";
@@ -196,6 +199,7 @@ public class SwagLabTests extends BasicTestSwag {
                 topNavMenuPage.doesMenuButtonExist(),
                 "Hamburger menu button should be exist after click on cart button.");
     }
+
     @Test(priority = 11, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheCartIconIsPresented() {
         String username = "standard_user";
@@ -211,6 +215,7 @@ public class SwagLabTests extends BasicTestSwag {
                 topNavMenuPage.doesCartIconExist(),
                 "Cart icon should be presented.");
     }
+
     @Test(priority = 12, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheHamburgerMenuButtonIsEnabled() {
         String username = "standard_user";
@@ -226,6 +231,7 @@ public class SwagLabTests extends BasicTestSwag {
 
         leftNavMenuPage.waitForMenuToBeVisible();
     }
+
     @Test(priority = 13, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheCartIconIsWorking() {
         String username = "standard_user";
@@ -241,6 +247,7 @@ public class SwagLabTests extends BasicTestSwag {
                 baseUrl + "/cart.html",
                 "Should be redirected to cart page after click on cart button.");
     }
+
     @Test(priority = 14, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheCartIconHasCorrectNumberOfAddedItems() {
         String username = "standard_user";
@@ -265,6 +272,7 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertEquals(cartBadgeNumber, cartPage.getAddedCartItems(),
                 "Number in the cart icon should be equiavalent to the total numbers of added items.");
     }
+
     @Test(priority = 15, retryAnalyzer = SwagLabsRetry.class)
     public void verifyTheSubheaderTitle() {
         String username = "standard_user";
@@ -281,6 +289,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "Your Cart",
                 "After click on cart button the sub-header title should be 'Your Cart'.");
     }
+
     @Test(priority = 16, retryAnalyzer = SwagLabsRetry.class)
     public void verifyTheTotalNumberOfMenuOptions() {
         String username = "standard_user";
@@ -297,5 +306,29 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertEquals(leftNavMenuPage.getNumberOfLeftNavMenuItems(), 4,
                 "There should be four total options in menu.");
 
+    }
+    @Test(priority = 17, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyTheSpellingOfAllOptionsInMenu() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+        List<String> expectedLeftNavMenuItems = new ArrayList<>();
+        expectedLeftNavMenuItems.add("All Items");
+        expectedLeftNavMenuItems.add("About");
+        expectedLeftNavMenuItems.add("Logout");
+        expectedLeftNavMenuItems.add("Reset App State");
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        inventoryPage.clickOnCartButton();
+
+        topNavMenuPage.clickOnMenuButton();
+
+        for (int i = 0; i < leftNavMenuPage.getNumberOfLeftNavMenuItems(); i++) {
+            Assert.assertEquals(leftNavMenuPage.getSingleLeftNavMenuItemValue(i),
+                    expectedLeftNavMenuItems.get(i),
+                    "Items value should be " + expectedLeftNavMenuItems.get(i) + ".");
+        }
     }
 }
