@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage extends BasicPage {
@@ -38,5 +39,15 @@ public class CartPage extends BasicPage {
     }
     public boolean doesRemoveCartBtnExist() {
         return elementExist(By.id("remove-sauce-labs-backpack"));
+    }
+
+    public void clickOnRemoveCartItemBtn() {
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+    }
+
+    public void waitForCartItemBeInvisible() {
+        wait
+                .withMessage("Delete cart item should be invisible.")
+                .until(ExpectedConditions.invisibilityOfElementLocated(By.className("cart_item")));
     }
 }
