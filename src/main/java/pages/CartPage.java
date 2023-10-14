@@ -67,4 +67,7 @@ public class CartPage extends BasicPage {
         driver.findElement(By.id("checkout")).click();
     }
 
+    public boolean doesTwitterBtnExist() {
+        return elementExist(By.linkText("Twitter"));
+    }
 }

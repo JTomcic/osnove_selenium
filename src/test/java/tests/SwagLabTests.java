@@ -838,7 +838,7 @@ public class SwagLabTests extends BasicTestSwag {
                 "Cart Checkout button should be visible");
     }
 
-    @Test(priority = 34, retryAnalyzer = SwagLabsRetry.class)
+    @Test(priority = 36, retryAnalyzer = SwagLabsRetry.class)
     public void verifyIfTheCheckoutButtonIsWorking() {
         String username = "standard_user";
         String password = "secret_sauce";
@@ -873,6 +873,36 @@ public class SwagLabTests extends BasicTestSwag {
                 driver.getCurrentUrl(),
                 baseUrl + "/checkout-step-one.html",
                 "Should be redirected to checkout page after click on Checkout button.");
+    }
+
+    @Test(priority = 37, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheTwitterButtonIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesTwitterBtnExist(),
+                "Cart Twitter button should be visible");
     }
 
 }
