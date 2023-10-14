@@ -75,5 +75,8 @@ public class CartPage extends BasicPage {
         return elementExist(By.linkText("Facebook"));
     }
 
+    public boolean doesLinkedinBtnExist() {
+        return elementExist(By.linkText("LinkedIn"));
+    }
 
 }
