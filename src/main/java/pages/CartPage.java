@@ -50,4 +50,8 @@ public class CartPage extends BasicPage {
                 .withMessage("Delete cart item should be invisible.")
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.className("cart_item")));
     }
+
+    public boolean doesContinueShoppingBtnExist() {
+        return elementExist(By.id("continue-shopping"));
+    }
 }

@@ -740,4 +740,34 @@ public class SwagLabTests extends BasicTestSwag {
 
         cartPage.waitForCartItemBeInvisible();
     }
+
+    @Test(priority = 33, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheContinueButtonIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesContinueShoppingBtnExist(),
+                "Cart Continue Shopping button should be visible");
+    }
 }
