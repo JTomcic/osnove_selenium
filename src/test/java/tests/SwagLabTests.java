@@ -672,7 +672,7 @@ public class SwagLabTests extends BasicTestSwag {
         cartPage.clickOnItemTitle();
 
         Assert.assertTrue(
-                driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item.html"),
+                driver.getCurrentUrl().contains(baseUrl + "/inventory-item.html"),
                 "Should be redirected to single item page after click on item title.");
     }
 
@@ -836,6 +836,43 @@ public class SwagLabTests extends BasicTestSwag {
         Assert.assertTrue(
                 cartPage.doesCheckoutBtnExist(),
                 "Cart Checkout button should be visible");
+    }
+
+    @Test(priority = 34, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheCheckoutButtonIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesCheckoutBtnExist(),
+                "Cart Checkout button should be visible");
+
+        cartPage.clickOnCheckoutBtn();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/checkout-step-one.html",
+                "Should be redirected to checkout page after click on Checkout button.");
     }
 
 }

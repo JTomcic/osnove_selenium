@@ -63,4 +63,8 @@ public class CartPage extends BasicPage {
         return elementExist(By.id("checkout"));
     }
 
+    public void clickOnCheckoutBtn() {
+        driver.findElement(By.id("checkout")).click();
+    }
+
 }
