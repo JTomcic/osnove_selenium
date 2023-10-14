@@ -1005,4 +1005,41 @@ public class SwagLabTests extends BasicTestSwag {
                 .until(ExpectedConditions.urlToBe("https://twitter.com/saucelabs"));
     }
 
+    @Test(priority = 41, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheFacebookButtonIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesFacebookBtnExist(),
+                "Cart Facebook button should be visible");
+
+        cartPage.clickOnFacebookBtn();
+
+        List<String> listOfTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(listOfTabs.get(1));
+        wait
+                .withMessage("Should be redirected to the sauce labs facebook account page after click on Facebook button.")
+                .until(ExpectedConditions.urlToBe("https://www.facebook.com/saucelabs"));
+    }
 }
