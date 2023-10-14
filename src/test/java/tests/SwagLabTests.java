@@ -605,4 +605,39 @@ public class SwagLabTests extends BasicTestSwag {
 
         Assert.assertTrue(cartPage.doesQuantityCartItemExist(), "Item's quantity should be visible.");
     }
+
+    @Test(priority = 29, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheItemsTitleIsClickable() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(cartPage.doesItemTitleExist(),
+                "Item's title should be visible.");
+
+        cartPage.clickOnItemTitle();
+
+        Assert.assertFalse(
+                driver.getCurrentUrl() == baseUrl + "/cart.html",
+                "Should be redirected to single product page after click on item title.");
+    }
 }
