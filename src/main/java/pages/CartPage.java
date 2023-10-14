@@ -36,4 +36,7 @@ public class CartPage extends BasicPage {
     public boolean doesQuantityCartItemExist() {
         return elementExist(By.className("cart_quantity"));
     }
+    public boolean doesRemoveCartBtnExist() {
+        return elementExist(By.id("remove-sauce-labs-backpack"));
+    }
 }

@@ -675,4 +675,35 @@ public class SwagLabTests extends BasicTestSwag {
                 driver.getCurrentUrl().contains("https://www.saucedemo.com/inventory-item.html"),
                 "Should be redirected to single item page after click on item title.");
     }
+
+
+    @Test(priority = 31, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheRemoveButtonIsPresented() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesRemoveCartBtnExist(),
+                "Cart item remove button should be visible");
+    }
 }
