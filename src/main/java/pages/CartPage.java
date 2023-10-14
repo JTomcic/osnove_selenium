@@ -70,4 +70,10 @@ public class CartPage extends BasicPage {
     public boolean doesTwitterBtnExist() {
         return elementExist(By.linkText("Twitter"));
     }
+
+    public boolean doesFacebookBtnExist() {
+        return elementExist(By.linkText("Facebook"));
+    }
+
+
 }
