@@ -58,4 +58,9 @@ public class CartPage extends BasicPage {
     public void clickOnContinueShoppingBtn() {
         driver.findElement(By.id("continue-shopping")).click();
     }
+
+    public boolean doesCheckoutBtnExist() {
+        return elementExist(By.id("checkout"));
+    }
+
 }
