@@ -87,9 +87,15 @@ public class CartPage extends BasicPage {
         return elementExist(By.linkText("LinkedIn"));
     }
 
-
     public void clickOnLinkedinBtn() {
         driver.findElement(By.linkText("LinkedIn")).click();
     }
 
+    public boolean doesFooterCopyRightExist() {
+        return elementExist(By.className("footer_copy"));
+    }
+
+    public String getFooterCopyRightText() {
+        return driver.findElement(By.className("footer_copy")).getText();
+    }
 }
