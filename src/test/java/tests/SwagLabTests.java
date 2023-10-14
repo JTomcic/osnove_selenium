@@ -1,9 +1,11 @@
 package tests;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import retry.SwagLabsRetry;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -964,4 +966,43 @@ public class SwagLabTests extends BasicTestSwag {
                 cartPage.doesLinkedinBtnExist(),
                 "Cart Linkedin button should be visible");
     }
+
+    @Test(priority = 40, retryAnalyzer = SwagLabsRetry.class)
+    public void verifyIfTheTwitterButtonIsWorking() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+
+        loginPage.clearAndTypeUsername(username);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/inventory.html",
+                "Should be redirected to inventory page after login.");
+
+        inventoryPage.scrollToItem();
+
+        inventoryPage.clickOnAddCartButton();
+
+        topNavMenuPage.clickOnShoppingCartButton();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "/cart.html",
+                "Should be redirected to cart page after click on cart button.");
+
+        Assert.assertTrue(
+                cartPage.doesTwitterBtnExist(),
+                "Cart Twitter button should be visible");
+
+        cartPage.clickOnTwitterBtn();
+
+        List<String> listOfTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(listOfTabs.get(1));
+        wait
+                .withMessage("Should be redirected to the sauce labs twitter account page after click on Twitter button.")
+                .until(ExpectedConditions.urlToBe("https://twitter.com/saucelabs"));
+    }
+
 }
